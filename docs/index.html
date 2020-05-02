@@ -1,0 +1,1698 @@
+<!DOCTYPE html>
+<html lang="en">
+<title>My SQL Project</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+<link rel="stylesheet" href="./highlight/styles/default.css">
+<script src="./highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script src="https://kit.fontawesome.com/f52cb8ad17.js" crossorigin="anonymous"></script>
+<style>
+body,h1,h2,h3,h4,h5 {font-family: "Poppins", sans-serif}
+body {font-size:16px;}
+.w3-half img{margin-bottom:-6px;margin-top:16px;opacity:0.8;cursor:pointer}
+.w3-half img:hover{opacity:1}
+button {
+  border: none;
+  color: white;
+  background-color: dodgerblue;
+  padding: 10px 15px;
+  font-size: 18px;
+  cursor: pointer;
+}
+button:hover {
+  background-color: rgb(26, 123, 219);
+}
+</style>
+<body>
+
+<!-- Sidebar/menu -->
+<nav class="w3-sidebar w3-blue-grey w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:300px;font-weight:bold;" id="mySidebar"><br>
+  <a href="javascript:void(0)" onclick="w3_close()" class="w3-button w3-hide-large w3-display-topleft" style="width:100%;font-size:22px">Close Menu</a>
+  <div class="w3-container">
+    <h3 class="w3-padding-64"><b>SQL Project<br>From Udemy</b></h3>
+  </div>
+  <div class="w3-bar-block">
+    <a href="#introduction" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Introduction</a> 
+    <a href="#basic" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">SQL Basics</a> 
+    <a href="#details" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Project Details</a> 
+    <a href="#result" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Project Result</a> 
+  </div>
+</nav>
+
+<!-- Top menu on small screens -->
+<header class="w3-container w3-top w3-hide-large w3-blue-grey w3-xlarge w3-padding">
+  <a href="javascript:void(0)" class="w3-button w3-blue-grey w3-margin-right" onclick="w3_open()">☰</a>
+  <span>SQL Project</span>      
+</header>
+
+<!-- Overlay effect when opening sidebar on small screens -->
+<div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:340px;margin-right:40px">
+
+  <!-- Header -->
+  <div class="w3-container" style="margin-top:80px" id="introduction">
+    <h1 class="w3-jumbo"><b>Project Based SQL Course: <br>Code like a SQL Programmer</b></h1>
+    <a href="https://github.com/ZhuochengLin/SQL_Project" target="_blank">
+      <button type="button"><span style="margin-left: 5px; margin-right: 10px;">View on Github</span><i class="fab fa-github"></i></button>
+    </a>
+    <h1 class="w3-xxxlarge w3-text-blue-grey"><b>Introduction</b></h1>
+    <hr style="width:50px;border:5px solid rgb(71, 135, 172)" class="w3-round">
+    <p>This project is a course assignment built on a well-designed mock dataset, which covers all the commonly used SQL quaries and integrates all the quaries into stored procedures.
+      To be specific, <b>Microsoft SQL Server</b> is used in this project.
+    </p>
+    <p>You can find the course details through this link: <a class="w3-text-blue-grey" href="https://www.udemy.com/course/project-based-sql-course/" target="_blank">https://www.udemy.com/course/project-based-sql-course/</a></p>
+    <p>To simulate a real life problem solving process, the dataset we use is designed to be intricate enough to give interesting exercises. To fully understand this project may need
+        some background knowledge on Insurance, which I'll briefly talk about in the "Project Details" part.</p>
+    <p>To better understand the content and practice my skills, I decide to gether all the key points from the lectures, exercise codes, project details and my personal notes together
+        and put them into this GitHub Repo for future use.</p>
+    <p>If you are interested in my work or have any other thoughts, welcome to reach out to me, <a href="mailto: zhuochengg.lin@gmail.com" class="w3-text-blue-grey">zhuochengg.lin@gmail.com</a></p>
+  </div>
+
+  <!-- basic -->
+  <div class="w3-container" id="basic" style="margin-top:75px">
+    <h1 class="w3-xxxlarge w3-text-blue-grey"><b>SQL Basics</b></h1>
+    <hr style="width:50px;border:5px solid rgb(71, 135, 172)" class="w3-round">
+    <p>All the commonly used SQL syntax will be displayed as in examples in this part.</p>
+    <!-- p1 -->
+    <h2>SELECT, ORDER BY, WHERE</h2>
+    <h3>SELECT</h3>
+    <pre>
+      <code class="sql">
+        SELECT *
+        FROM Users
+      </code>
+    </pre>
+    <h3>ORDER BY</h3>
+    <pre>
+      <code class="sql">
+        SELECT *
+        FROM ClaimLog
+        ORDER BY PK
+
+        -- first 4 rows
+        SELECT TOP 4 UserName, LastFirstName, Title, PaymentLimit
+        FROM Users
+        ORDER BY PaymentLimit DESC
+      </code>
+    </pre>
+    <h3>WHERE</h3>
+    <pre>
+      <code class="sql">
+        SELECT ClaimNumber, InjuryState, ExaminerCode 
+        FROM Claim
+        WHERE ExaminerCode = 'lnikki'
+
+        SELECT UserName, Title, ReserveLimit 
+        FROM Users
+        -- match any element containing "specialist"
+        WHERE Title LIKE '%specialist%'
+      </code>
+    </pre>
+    <h2>AND, OR, NULL</h2>
+    <h3>AND</h3>
+    <pre>
+      <code class="sql">
+        SELECT *
+        FROM ClaimLog
+        WHERE FieldName = 'ExaminerCode' AND OldValue = 'Unassigned'
+      </code>
+    </pre>
+    <h3>OR</h3>
+    <pre>
+      <code class="sql">
+        SELECT *
+        FROM Users
+        WHERE UserName = 'dclara' OR Supervisor = 'dclara'
+      </code>
+    </pre>
+    <h3>NULL</h3>
+    <pre>
+      <code class="sql">
+        SELECT ClaimantID
+        , ClosedDate
+        , ReopenedDate
+        -- convert result to integer
+        , TRY_CONVERT(int, ClosedDate - ReopenedDate) AS DateDifference
+      FROM Claimant
+      WHERE ClosedDate IS NOT NULL
+      </code>
+    </pre>
+    <h2>Aggregate Functions</h2>
+    <h3>MAX, MIN, AVG, COUNT</h3>
+    <pre>
+      <code class="sql">
+      SELECT MAX(PaymentLimit) AS MaximumPaymentLimit 
+        , MIN(PaymentLimit) AS MinimumPaymentLimit
+        , AVG(PaymentLimit) AS AvgPaymentLimit
+      FROM Users
+      
+      SELECT COUNT(ReopenedDate) AS ReopenedCount
+      FROM Claimant 
+      </code>
+    </pre>
+    <h2>DISTINCT vs GROUP BY</h2>
+    <p><b>DISTINCT</b> is more convenient to extract unique values.</p>
+    <pre>
+      <code class="sql">
+        SELECT DISTINCT ExaminerCode
+        FROM Claim
+        
+        SELECT DISTINCT ExaminerCode
+          , InjuryState
+          , JurisdictionID
+          , YEAR(EntryDate) AS EntryYear
+        FROM Claim
+
+        SELECT ExaminerCode
+        , InjuryState
+        , JurisdictionID
+        , YEAR(EntryDate) AS EntryYear
+        FROM Claim
+        GROUP BY ExaminerCode
+          , InjuryState
+          , JurisdictionID
+          , YEAR(EntryDate)
+      </code>
+    </pre>
+    <p><b>GROUP BY</b> is more powerful when being used with aggregate functions.</p>
+    <pre>
+      <code class="sql">
+        SELECT ExaminerCode
+          , COUNT(*) AS NumberOfClaimsHandled
+        FROM Claim
+        GROUP BY ExaminerCode
+      </code>
+    </pre>
+    <h2>Other Statements</h2>
+    <h3>INTO, to make a new table</h3>
+    <pre>
+      <code class="sql">
+        SELECT *
+        INTO Office1
+        FROM Office
+        
+        SELECT TOP 10 BusinessName, COUNT(BusinessName) AS Employees
+        INTO Top10Inc
+        FROM Patient
+        WHERE BusinessName LIKE '%inc%'
+        GROUP BY BusinessName
+        ORDER BY COUNT(BusinessName)
+      </code>
+    </pre>
+    <h3>WHERE ... IN ...</h3>
+    <p>More convenient than using multiple <b>OR</b></p>
+    <pre>
+      <code class="sql">
+        SELECT *
+        FROM Attachment
+        WHERE EnteredBy IN ('qkemp', 'kgus', 'unassigned')
+      </code>
+    </pre>
+    <h3>HAVING, filtering after GROUP BY</h3>
+    <p>More convenient than using multiple <b>OR</b></p>
+    <pre>
+      <code class="sql">
+      SELECT EnteredBy
+        , COUNT(*) AS NumberOfPublishes
+      FROM ReservingTool
+      WHERE IsPublished = 1
+      GROUP BY EnteredBy
+      HAVING COUNT(*) > 50
+      </code>
+    </pre>
+    <h2>Exercise</h2>
+    <h3>Ex 1</h3>
+    <pre>
+      <code class="sql">
+        SELECT *
+        FROM Attachment
+        WHERE EnteredBy = 'lnikki'
+          -- match any element ends with ".pdf"
+          AND FileName LIKE '%.pdf'
+      </code>
+    </pre>
+    <h3>Ex 2</h3>
+    <pre>
+      <code class="sql">
+        SELECT *
+        FROM ReserveType
+        WHERE reserveTypeID = 1 OR ParentID = 1
+      </code>
+    </pre>
+    <h3>Ex 3</h3>
+    <pre>
+      <code class="sql">
+        SELECT ClaimantID, COUNT(*) AS ReserveChangeCount
+        FROM Reserve
+        GROUP BY ClaimantID
+        HAVING COUNT(*) >= 15
+      </code>
+    </pre>
+    <h3>Ex 4</h3>
+    <p>Copy a table format to a new table, with no data.</p>
+    <pre>
+      <code class="sql">
+        SELECT TOP 0 *
+        INTO Claim2
+        FROM Claim
+      </code>
+    </pre>
+    <h3>Ex 5</h3>
+    <p><b>RIGHT</b> and <b>LEFT</b> are used to subset strings.</p>
+    <pre>
+      <code class="sql">
+      SELECT RIGHT(FileName, 4) AS AttachmentType
+        , COUNT(*) AS Counts
+      FROM Attachment
+      GROUP BY RIGHT(FileName, 4)
+      ORDER BY COUNT(*) DESC
+      </code>
+    </pre>
+    <hr>
+    <!-- p2 -->
+    <h2>INNER JOIN, LEFT JOIN</h2>
+    <h3>INNER JOIN</h3>
+    <p>Keep only the records that have matches on both tables.</p>
+    <pre>
+      <code class="sql">
+      SELECT R.ClaimantID
+        , RT.ReserveTypeDesc
+        , R.ReserveAmount
+      -- use alias to refer to a table
+      FROM Reserve R
+      INNER JOIN ReserveType RT ON RT.reserveTypeID = R.ReserveTypeID
+      
+      SELECT TOP 100 ClaimNumber, C.ClaimID, CL.*
+      FROM Claim C
+      INNER JOIN ClaimLog CL ON C.ClaimID = CL.PK
+      ORDER BY PK
+      </code>
+    </pre>
+    <h3>LEFT JOIN</h3>
+    <p>Keep all the records from the left table and add matched records from the right table.</p>
+    <pre>
+      <code class="sql">
+        SELECT C.ClaimNumber, SUM(RT.ExpenseReservingAmount) AS ExpensesSum
+        FROM Claim C
+        LEFT JOIN ReservingTool RT ON C.ClaimNumber = RT.ClaimNumber
+        GROUP BY C.ClaimNumber
+        ORDER BY SUM(RT.ExpenseReservingAmount)
+      </code>
+    </pre>
+    <h3>PRACTICE</h3>
+    <pre>
+      <code class="sql">
+        SELECT CS.ClaimStatusDesc, Clmt.ClaimantID, P.MiddleName
+        FROM Claimant Clmt
+        INNER JOIN ClaimStatus CS ON CS.ClaimStatusID = Clmt.claimStatusID
+        INNER JOIN Patient P ON Clmt.PatientID = P.PatientID
+        WHERE P.MiddleName != ''
+      </code>
+    </pre>
+    <p>Using <b>AND</b> when joining tables means filtering happens before joining.</p>
+    <pre>
+      <code class="sql">
+        SELECT C.ClaimNumber, COUNT(CL.PK) AS LockCount
+        FROM Claim C
+        LEFT JOIN ClaimLog CL ON CL.PK = C.ClaimID AND FieldName = 'LockedBy'
+        GROUP BY C.ClaimNumber
+        ORDER BY LockCount
+      </code>
+    </pre>
+    <h2>Exercise</h2>
+    <h3>Ex 1</h3>
+    <pre>
+      <code class="sql">
+        SELECT C.ClaimNumber, P.FirstName, P.MiddleName, P.LastName
+        FROM Claim C
+        INNER JOIN Claimant CL ON C.ClaimID = CL.ClaimID
+        INNER JOIN Patient P ON CL.PatientID = P.PatientID
+        WHERE C.ClaimNumber = '752663830-X'
+      </code>
+    </pre>
+    <h3>Ex 2</h3>
+    <pre>
+      <code class="sql">
+        SELECT O.OfficeDesc AS Office, COUNT(U.UserName) AS UserCount
+        FROM Office O
+        LEFT JOIN Users U ON O.OfficeID = U.OfficeID
+        GROUP BY O.OfficeDesc
+        ORDER BY COUNT(U.UserName) DESC
+      </code>
+    </pre>
+    <h3>Ex 3</h3>
+    <pre>
+      <code class="sql">
+        SELECT O.OfficeID, R.*
+        FROM Reserve R
+        INNER JOIN Users U ON R.EnteredBy = U.UserName
+        INNER JOIN Office O ON U.OfficeID = O.OfficeID
+        WHERE O.OfficeDesc = 'San Francisco'
+      </code>
+    </pre>
+    <h3>Ex 4</h3>
+    <p><b>ISNULL</b> is used to replace NULL value.</p>
+    <pre>
+      <code class="sql">
+      SELECT ISNULL(RT2.ReserveTypeDesc, RT1.ReserveTypeDesc) AS ReserveBucket
+        , RT2.ReserveTypeDesc AS ReserveParent
+        , R.*
+      FROM Reserve R
+      INNER JOIN ReserveType RT1 ON R.ReserveTypeID = RT1.reserveTypeID
+      LEFT JOIN ReserveType RT2 ON RT1.ParentID = RT2.reserveTypeID
+      </code>
+    </pre>
+    <hr>
+    <h2>Subquery</h2>
+    <h3>Basic</h3>
+    <pre>
+      <code class="sql">
+        SELECT C.ClaimNumber
+        FROM (
+          SELECT TOP 10 *
+          FROM Claim
+        ) C
+      </code>
+    </pre>
+    <h3>Subquery (WHERE)</h3>
+    <p>Should be careful about the result of the subquery, a single value? or a column?</p>
+    <pre>
+      <code class="sql">
+        -- a column
+        SELECT Supervisor, UserName
+        FROM Users
+        WHERE UserName IN (
+          SELECT DISTINCT EnteredBy
+          FROM ReservingTool
+        )
+        -- a single value
+        SELECT MedicalReservingAmount, EnteredOn, IsPublished
+        FROM ReservingTool
+        WHERE EnteredOn = (
+          SELECT MAX(EnteredOn)
+          FROM ReservingTool
+          WHERE IsPublished = 1
+        ) AND IsPublished = 1
+      </code>
+    </pre>
+    <h3>Subquery (FROM)</h3>
+    <pre>
+      <code class="sql">
+      SELECT C.ClaimID, R.ReserveAmount, ReserveSum.TotalReserveAmount
+        , ReserveAmount / TotalReserveAmount AS ReserveProportion
+      FROM (
+        SELECT Cl2.ClaimantID, SUM(R2.ReserveAmount) AS TotalReserveAmount
+        FROM Reserve R2
+        INNER JOIN Claimant Cl2 ON Cl2.ClaimantID = R2.ClaimantID
+        INNER JOIN Claim C2 ON Cl2.ClaimID = C2.ClaimID
+        WHERE C2.ClaimNumber = '500008648-1'
+        GROUP BY Cl2.ClaimantID
+      ) ReserveSum
+      INNER JOIN Reserve R ON ReserveSum.ClaimantID = R.ClaimantID
+      INNER JOIN Claimant Cl ON Cl.ClaimantID = R.ClaimantID
+      INNER JOIN Claim C ON Cl.ClaimID = C.ClaimID
+      WHERE C.ClaimNumber = '500008648-1'
+      </code>
+    </pre>
+    <p>Instead of using <b>GROUP BY</b>, there is another way to apply aggregate functions (using <b>OVER</b>).</p>
+    <pre>
+      <code class="sql">
+      SELECT C.ClaimNumber
+        , R.ReserveAmount
+        , SUM(ReserveAmount) OVER (PARTITION BY C.ClaimNumber) AS TotalReserveSum
+      FROM Reserve R
+      INNER JOIN Claimant Cl ON Cl.ClaimantID = R.ClaimantID
+      INNER JOIN Claim C ON Cl.ClaimID = C.ClaimID
+      WHERE C.ClaimNumber = '500008648-1'
+      </code>
+    </pre>
+    <h3>Practice</h3>
+    <pre>
+      <code class="sql">
+        SELECT CL.PK AS ClaimID, CL.NewValue AS CurrentExaminer, x.LatestAssignedDate AS AssignedDate
+        FROM (
+          SELECT PK, MAX(EntryDate) AS LatestAssignedDate
+          FROM ClaimLog
+          WHERE FieldName = 'ExaminerCode'
+          GROUP BY PK
+        ) x
+        INNER JOIN ClaimLog CL ON x.PK = CL.PK AND x.LatestAssignedDate = CL.EntryDate AND CL.FieldName = 'ExaminerCode'
+        ORDER BY Cl.PK
+      </code>
+    </pre>
+    <h2>Exercise</h2>
+    <h3>Ex 1</h3>
+    <pre>
+      <code class="sql">
+        -- a single value
+        SELECT *
+        FROM Reserve
+        WHERE ReserveAmount > (
+          SELECT ReserveAmount
+          FROM Reserve
+          WHERE ReserveID = 588785
+        )
+      </code>
+    </pre>
+    <h3>Ex 2</h3>
+    <pre>
+      <code class="sql">
+        -- a single value
+        SELECT *
+        FROM Reserve
+        WHERE ReserveAmount > (
+          SELECT AVG(ReserveAmount)
+          FROM Reserve
+        )
+      </code>
+    </pre>
+    <h3>Ex 3</h3>
+    <p>Use a subquery inside a subquery to extract the 2nd highest value.</p>
+    <pre>
+      <code class="sql">
+        -- a single value
+        SELECT ReserveID, ReserveAmount
+        FROM Reserve
+        WHERE ReserveAmount = (
+          -- find the 2nd highest
+          SELECT MIN(ReserveAmount)
+          FROM ( 
+            SELECT TOP 2 ReserveAmount
+            FROM Reserve
+            ORDER BY ReserveAmount DESC
+          ) x
+        )
+      </code>
+    </pre>
+    <h3>Ex 4</h3>
+    <p>A complicated example. To find the first and the last medical reserving amount.</p>
+    <pre>
+      <code class="sql">
+        SELECT sub.*, RT1.MedicalReservingAmount AS FirstMedicalAmount, RT2.MedicalReservingAmount AS LastMedicalAmount
+        -- access the first amount date
+        FROM (
+          SELECT RT_First.ClaimNumber, FirstPublishedDate, LastPublishedDate
+          FROM (
+            SELECT ClaimNumber, MIN(EnteredOn) AS FirstPublishedDate
+            FROM ReservingTool
+            WHERE IsPublished = 1
+            GROUP BY ClaimNumber
+          ) RT_First
+          -- access the last amount date
+          INNER JOIN (
+            SELECT ClaimNumber, MAX(EnteredOn) AS LastPublishedDate
+            FROM ReservingTool
+            WHERE IsPublished = 1
+            GROUP BY ClaimNumber
+          ) RT_Last ON RT_Last.ClaimNumber = RT_First.ClaimNumber
+        ) sub
+        -- add reserving amount data
+        LEFT JOIN ReservingTool RT1 ON RT1.ClaimNumber = sub.ClaimNumber AND RT1.EnteredOn = sub.FirstPublishedDate AND RT1.IsPublished = 1
+        LEFT JOIN ReservingTool RT2 ON RT2.ClaimNumber = sub.ClaimNumber AND RT2.EnteredOn = sub.LastPublishedDate AND RT2.IsPublished = 1
+      </code>
+    </pre>
+    <p>Use <b>OVER</b> to shorten the code.</p>
+    <pre>
+      <code class="sql">
+        SELECT sub.*, RT1.MedicalReservingAmount AS FirstMedicalAmount, RT2.MedicalReservingAmount AS LastMedicalAmount
+        FROM (
+          SELECT DISTINCT ClaimNumber
+            , MIN(EnteredOn) OVER (PARTITION BY ClaimNumber) AS FirstPublishedDate
+            , MAX(EnteredOn) OVER (PARTITIOn BY ClaimNumber) AS LastPublishedDate
+          FROM ReservingTool
+          WHERE IsPublished = 1
+        ) sub
+        LEFT JOIN ReservingTool RT1 ON RT1.ClaimNumber = sub.ClaimNumber AND RT1.EnteredOn = sub.FirstPublishedDate AND RT1.IsPublished = 1
+        LEFT JOIN ReservingTool RT2 ON RT2.ClaimNumber = sub.ClaimNumber AND RT2.EnteredOn = sub.LastPublishedDate AND RT2.IsPublished = 1
+      </code>
+    </pre>
+    <hr>
+    <h2>Database</h2>
+    <pre>
+      <code class="sql">
+        CREATE DATABASE ExampleDB
+        DROP DATABASE ExampleDB
+      </code>
+    </pre>
+    <h2>Table</h2>
+    <h3>Many ways to create tables:</h3>
+    <ul>
+      <li>Use <b>SELECT INTO</b> to create a table similar to an existing one.</li>
+      <li>Import an external table to the database, which will create a new table automatically.</li>
+      <li>Creat a brand new table:</li>
+      <ul>
+        <li>Use Microsoft SQL Server Management interface to create, which is user-friendly.</li>
+        <li>Use SQL syntax to create, which can be faster and automated.</li>
+      </ul>
+    </ul>
+    <h3>Two important things when creating a new table</h3>
+    <ul>
+      <li>Data types: bit, int, float, date, datetime, char, varchar, varchar(MAX) and etc.</li>
+      <li>Constraints: PRIMARY KEY, FOREIGN KEY, IDENTITY, INDEX, NOT NULL and etc.</li>
+    </ul>
+    <h3>Create a table</h3>
+    <pre>
+      <code class="sql">
+        CREATE TABLE Bill (
+          BillID int
+          , ClaimantID int
+          , PatientID int
+          , DateReceived datetime
+          , DateBilled datetime
+          , TotalBilledAmount float
+          , ProviderID varchar(8)
+          , ProviderName varchar(255)
+          , Description varchar(MAX)
+        )
+        DROP TABLE Bill
+      </code>
+    </pre>
+    <h3>Create a table (with constraints)</h3>
+    <pre>
+      <code class="sql">
+        CREATE TABLE Bill (
+          -- start from 1, increment by 1
+          BillID int PRIMARY KEY IDENTITY(1, 1)
+          , ClaimantID int FOREIGN KEY REFERENCES Claimant(ClaimantID)
+          , PatientID int FOREIGN KEY REFERENCES Patient(PatientID)
+          , DateReceived datetime
+          , DateBilled datetime
+          , TotalBilledAmount float NOT NULL
+          , ProviderID varchar(8)
+          , ProviderName varchar(255)
+          , Description varchar(MAX)
+        )
+        DROP TABLE Bill
+      </code>
+    </pre>
+    <h3>Alter a table</h3>
+    <p>Note: to add <b>IDENTITY</b>, through user interface is quicker.</p>
+    <pre>
+      <code class="sql">
+        -- modify data type
+        ALTER TABLE Bill
+        ALTER COLUMN ProviderID varcahr(32)
+ 
+        ALTER TABLE Bill
+        ADD ExtraBillColumn varchar(MAX)
+
+        ALTER TABLE Bill
+        DROP COLUMN ExtraBillColumn
+        -- modify constraint
+        ALTER TABLE Bill
+        ALTER COLUMN BillID int NOT NULL
+
+        -- remember to use parentheses
+        ALTER TABLE Bill
+        ADD PRIMARY KEY (BillID)
+        
+        ALTER TABLE Bill
+        ADD FOREIGN KEY (ClaimantID) REFERENCES CLaimant(ClaimantID)
+      </code>
+    </pre>
+    <h2>Variable</h2>
+    <h3>Normal variable</h3>
+    <p>Two ways to assign a value to a variable:</p>
+    <pre>
+      <code class="sql">
+        -- first
+        DECLARE @InflationRate float
+        SET @InflationRate = 0.02
+        
+        SELECT UserName
+          , ReserveLimit
+          , ReserveLimit * (1 + @InflationRate) AS NextYearReserveLimit
+        FROM Users
+
+        -- second
+        DECLARE @PreviousUser varchar(30)
+
+        SELECT TOP 1 @PreviousUser = OldValue
+        FROM ClaimLog
+        WHERE PK = 24109
+          AND FieldName = 'ExaminerCode'
+          AND EntryDate = (
+            SELECT MAX(EntryDate) 
+            FROM ClaimLog
+            WHERE PK = 24109
+              AND FieldName = 'ExaminerCode'
+          )
+
+        SELECT @PreviousUser AS PreviousUser
+      </code>
+    </pre>
+    <h3>Table variable</h3>
+    <p>Need to specify data types and constraints.</p>
+    <pre>
+      <code class="sql">
+        DECLARE @MedicalReserveTypes_Array TABLE (
+          MedicalReserveType varcahr(MAX)
+        )
+        
+        DECLARE @Temp_Reserve_Tbl TABLE (
+          ClaimNumber varchar(30)
+          , TotalReserveAmount float
+          , PatientName varchar(63)
+        )
+        SELECT * FROM @Temp_Reserve_Tbl
+      </code>
+    </pre>
+    <h2>Exercise</h2>
+    <h3>Ex 1</h3>
+    <pre>
+      <code class="sql">
+        CREATE TABLE Prices (
+          PriceID int PRIMARY KEY IDENTITY(1, 1)
+          , ReserveTypeID int FOREIGN KEY REFERENCES ReserveType(ReserveTypeID)
+          , ProcedureName varchar(6)
+          , ExpectedPrice float
+        )
+        SELECT * FROM Prices
+        DROP TABLE Prices
+      </code>
+    </pre>
+    <h3>Ex 2</h3>
+    <pre>
+      <code class="sql">
+        CREATE TABLE BillDetail (
+          BillDetailID int PRIMARY KEY IDENTITY(1, 1)
+          , BillID int FOREIGN KEY REFERENCES Bill(BillID)
+          , LineNumber int NOT NULL
+          , ProcedureCode varchar(6)
+          , Description varchar(MAX)
+          , Quantity int
+          , PricePerUnit float
+          , TotalPrice float NOT NULL
+        )
+        SELECT * FROM BillDetail
+        DROP TABLE BillDetail
+      </code>
+    </pre>
+    <h3>Ex 3</h3>
+    <pre>
+      <code class="sql">
+        DECLARE @DocumentType varchar(8)
+        SET @DocumentType = '.pdf'
+        
+        SELECT @DocumentType
+      </code>
+    </pre>
+    <h3>Ex 4</h3>
+    <pre>
+      <code class="sql">
+        DECLARE @ReserveSum TABLE (
+          ClaimantID int PRIMARY KEY
+          , ReserveAmountSum float NOT NULL
+        )
+        
+        SELECT * FROM @ReserveSum
+      </code>
+    </pre>
+    <hr>
+    <h2>INSERT INTO</h2>
+    <p>Need to specify the fields that we want to add data into.</p>
+    <p>Note: if we're going to add values to all columns, then we can write without specifying the fields.</p>
+    <pre>
+      <code class="sql">
+        -- create a table from an existing one
+        SELECT TOP 0 *
+        INTO Office2
+        FROM Office1
+
+        INSERT INTO Office2 (
+          OfficeCode
+          , OfficeDesc
+          , City
+          , State
+        )
+        VALUES (
+          'ATL'
+          , 'Atlana'
+          , ''
+          , 'GA'
+        )
+        SELECT * FROM Office2
+        
+        -- create a table variable
+        DECLARE @Temp_Reserves_Tbl TABLE (
+          ClaimNumber varchar(30)
+          , TotalReserveAmount float
+          , PatientName varchar(63)
+        )
+        INSERT INTO @Temp_Reserves_Tbl (
+          ClaimNumber
+          , TotalReserveAmount
+          , PatientName
+        )
+        VALUES ('12345ABC', 100, 'Rob the Builder')
+        SELECT * FROM @Temp_Reserves_Tbl
+      </code>
+    </pre>
+    <h2>UPDATE, DELETE</h2>
+    <h3>UPDATE</h3>
+    <p>If no <b>WHERE</b> syntax found, then the entire column will be modified.</p>
+    <pre>
+      <code class="sql">
+        UPDATE Office1
+        SET City = OfficeDesc
+          , OfficeDesc = ''
+        
+        SELECT * FROM Office1
+        UPDATE Office1
+        SET State = 'IL'
+        WHERE State IS NULL
+      </code>
+    </pre>
+    <h3>DELETE</h3>
+    <p>If no <b>WHERE</b> syntax found, then the entire dataset will be deleted from the table.</p>
+    <pre>
+      <code class="sql">
+        DELETE FROM Office1
+        WHERE OfficeID > 4
+      </code>
+    </pre>
+    <h2>INSERT INTO from a table</h2>
+    <p>Select columns from existing tables, then <b>INSERT INTO</b> a new table.</p>
+    <pre>
+      <code class="sql">
+        DECLARE @Temp_Reserves_Tbl TABLE (
+          ClaimNumber varchar(30)
+          , TotalReserveAmount float
+          , PatientName varchar(63)
+        )
+        
+        INSERT INTO @Temp_Reserves_Tbl
+        SELECT C.ClaimNumber
+          , SUM(R.ReserveAmount) AS ReserveSum
+          -- TRIM will remove the space on both sides
+          , TRIM(P.LastName + ' ' + P.FirstName + P.MiddleName) AS PatientName
+        FROM Claim C
+        INNER JOIN Claimant Cl ON Cl.ClaimID = C.ClaimID
+        INNER JOIN Reserve R ON R.ClaimantID = Cl.ClaimantID
+        INNER JOIN Patient P ON P.PatientID = Cl.PatientID
+        GROUP BY C.ClaimNumber, TRIM(P.LastName + ' ' + P.FirstName + P.MiddleName)
+        
+        SELECT * FROM @Temp_Reserves_Tbl
+      </code>
+    </pre>
+    <h2>UPDATE from a table</h2>
+    <p>Columns from existing tables can be used to <b>SET</b> the colums in a new table.</p>
+    <pre>
+      <code class="sql">
+        UPDATE MedicalReserveCases
+        SET ClaimNumber = C.NewClaimNumber
+        FROM MedicalReserveCases M
+        INNER JOIN ClaimNumberFixes  C ON M.ClaimNumber = C.OldClaimNumber
+        
+        SELECT * FROM MedicalReserveCases
+      </code>
+    </pre>
+    <h2>Temporary Tables</h2>
+    <ul>
+      <li>Temporary tables are not stored in the working database, but stored in <b>tempdb</b>, a system database.</li>
+      <li>Can be useful when repeatedly interacting with a small number of records.</li>
+      <li>Don't store a large dataset into a temporary table.</li>
+      <li>Remember to drop the temporary table after done using it.</li>
+    </ul>
+    <pre>
+      <code class="sql">
+        -- example 1
+        SELECT NewValue AS StartingUser
+        INTO #Temp
+        FROM ClaimLog
+        WHERE FieldName = 'ExaminerCode'
+          AND OldValue = 'unassigned'
+        
+        SELECT * FROM #Temp
+        DROP TABLE #Temp
+        
+        -- example 2
+        CREATE TABLE #Temp (
+          ClaimID int
+          , CurrentExaminer varchar(50)
+          , PreviousExaminer varchar(50)
+          , AssignedDate datetime
+          , Level int
+        )
+        
+        INSERT INTO #Temp
+        SELECT CL.PK AS ClaimID
+          , CL.NewValue AS CurrentExaminer
+          , NULL AS PreviousExaminer
+          , x.LatestAssignedDate AS AssignedDate
+          , 0 AS Level
+        FROM (
+          SELECT PK, MAX(EntryDate) AS LatestAssignedDate
+          FROM ClaimLog
+          WHERE FieldName = 'ExaminerCode'
+          GROUP BY PK	
+        ) x
+        INNER JOIN ClaimLog CL ON CL.PK = x.PK 
+          AND CL.FieldName = 'ExaminerCode'
+          AND CL.EntryDate = x.LatestAssignedDate
+        ORDER BY CL.PK
+        
+        SELECT * FROM #Temp
+        
+        -- example 3
+        INSERT INTO #Temp
+        SELECT T2.ClaimID
+          , T2.CurrentExaminer
+          , CL2.NewValue AS PreviousExaminer
+          , x.LatestAssignedDate AS AssignedDate
+          , 1 AS Level
+        FROM (
+          SELECT CL.PK, MAX(EntryDate) AS LatestAssignedDate
+          FROM ClaimLog CL
+          INNER JOIN #Temp T ON T.ClaimID = CL.PK
+          WHERE CL.FieldName = 'ExaminerCode' AND CL.EntryDate < T.AssignedDate
+          GROUP BY PK	
+        ) x
+        INNER JOIN ClaimLog CL2 ON CL2.PK = x.PK 
+          AND CL2.FieldName = 'ExaminerCode'
+          AND CL2.EntryDate = x.LatestAssignedDate
+        INNER JOIN #Temp T2 ON CL2.PK = T2.ClaimID 
+        ORDER BY CL2.PK
+        
+        SELECT * FROM #Temp
+        ORDER BY ClaimID, Level
+      </code>
+    </pre>
+    <h2>Exercise</h2>
+    <p>Exercise 1 - 3 are using [UPDATE] database.</p>
+    <h3>Ex 1</h3>
+    <pre>
+      <code class="sql">
+        USE [UPDATE]
+        GO
+        
+        UPDATE [G&T Results 2017-18_Temp]
+        SET [Entering Grade Level] = 1
+        WHERE [Entering Grade Level] IS NULL
+      </code>
+    </pre>
+    <h3>Ex 2</h3>
+    <pre>
+      <code class="sql">
+        -- step 1
+        -- make sure the delimiter is "," only
+        UPDATE [G&T Results 2017-18_Temp]
+        SET [School Preferences] = REPLACE([School Preferences], '/', ',')
+        -- step 2
+        -- find the index of ","
+        SELECT [School Preferences]
+          , CHARINDEX(',', [School Preferences], 1) AS CommaIndex
+          -- use CHARINDEX to get the "," index
+          , CASE WHEN CHARINDEX(',', [School Preferences], 1) = 0 THEN [School Preferences]
+            ELSE LEFT([School Preferences], CHARINDEX(',', [School Preferences], 1) - 1) 
+            END AS PreferredSchool
+        FROM [G&T Results 2017-18_Temp]
+        -- step 3
+        UPDATE [G&T Results 2017-18_Temp]
+        SET [School Assigned] = 
+          CASE WHEN CHARINDEX(',', [School Preferences], 1) = 0 THEN [School Preferences]
+            ELSE LEFT([School Preferences], CHARINDEX(',', [School Preferences], 1) - 1) 
+            END
+        
+        WHERE [Overall Score] = 99 
+          AND ([School Assigned] IS NULL OR TRIM([School Assigned]) = 'NONE')
+        
+        SELECT * FROM [G&T Results 2017-18_Temp]
+      </code>
+    </pre>
+    <h3>Ex 3</h3>
+    <pre>
+      <code class="sql">
+        SELECT * 
+        INTO [G&T Results 2018-19_Temp]
+        FROM [G&T Results 2018-19]
+        
+        SELECT * FROM [G&T Results 2018-19_Temp]
+        
+        DELETE FROM [G&T Results 2018-19_Temp]
+        WHERE [Timestamp] IS NULL
+      </code>
+    </pre>
+    <h3>Ex 4</h3>
+    <pre>
+      <code class="sql">
+        USE Insurance
+        GO
+        
+        SELECT * FROM ReservingTool
+        
+        -- add a new record to ReserveType
+        INSERT INTO ReserveType 
+        VALUES (1, '', 'Fatality Misc', 10)
+      </code>
+    </pre>
+    <h3>Ex 5</h3>
+    <pre>
+      <code class="sql">
+        DECLARE @LargestClaimsInReservingTool TABLE (
+          ReservingToolID int
+          , ClaimNumber varchar(30)
+          , PublishedDate datetime
+          , TotalReservingAmount float
+        )
+        
+        INSERT INTO @LargestClaimsInReservingTool
+        SELECT TOP 5
+          ReservingToolID
+          , ClaimNumber
+          , EnteredOn AS PublishedDate
+          , MedicalReservingAmount + TDReservingAmount + PDReservingAmount + ExpenseReservingAmount AS TotalReservingAmount
+        FROM ReservingTool
+        WHERE IsPublished = 1
+        ORDER BY MedicalReservingAmount + TDReservingAmount + PDReservingAmount + ExpenseReservingAmount
+        
+        SELECT * FROM @LargestClaimsInReservingTool
+      </code>
+    </pre>
+    <h3>Ex 6</h3>
+    <pre>
+      <code class="sql">
+        CREATE TABLE #TotalIncurredTable (
+          ClaimantID int PRIMARY KEY
+          , ClaimNumber varchar(30)
+          , TotalIncurredAmount float
+        )
+        
+        INSERT INTO #TotalIncurredTable
+        SELECT Clmt.ClaimantID
+          , C.ClaimNumber
+          , SUM(ReserveAmount)
+        FROM Reserve R
+        INNER JOIN Claimant Clmt ON Clmt.ClaimantID = R.ClaimantID
+        INNER JOIN Claim C ON C.ClaimID = Clmt.ClaimID
+        GROUP BY Clmt.ClaimantID, C.ClaimNumber
+        ORDER BY SUM(ReserveAmount)
+        
+        SELECT * FROM #TotalIncurredTable
+        DROP TABLE #TotalIncurredTable
+      </code>
+    </pre>
+    <hr>
+    <h2>Stored Procedures</h2>
+    <p>Procedures are great for a number of uses:</p>
+    <ul>
+      <li>Save time by writing a code for a query that needs to be run many times.</li>
+      <li>Reduce network traffic.</li>
+      <li>Allow anyone to run the queries.</li>
+      <li>Better security.</li>
+    </ul>
+    <h3>Simple Procedure</h3>
+    <pre>
+      <code class="sql">
+        CREATE PROCEDURE SPGetReserve
+        AS
+        BEGIN
+          SELECT ReserveID, ClaimantID, ReserveAmount
+          FROM Reserve
+        END
+
+        -- three ways to execute
+        SPGetReserve
+        EXEC SPGetReserve
+        EXECUTE SPGetReserve
+      </code>
+    </pre>
+    <h3>Procedure with Variables</h3>
+    <pre>
+      <code class="sql">
+      -- since the procedure exists already, need to alter it
+      ALTER PROCEDURE SPGetReserve
+        @ReserveType varchar(30)
+        , @ReserveAmountMin float
+      AS
+      BEGIN
+        SELECT ReserveID, ClaimantID, ReserveAmount, RT.reserveTypeID, RT.ReserveTypeDesc
+        FROM Reserve R
+        INNER JOIN ReserveType RT ON R.ReserveTypeID = RT.reserveTypeID
+        WHERE RT.ReserveTypeDesc = @ReserveType
+          AND R.ReserveAmount > @ReserveAmountMin
+      END
+      
+      SPGetReserve 'Medical', 500
+      SPGetReserve @ReserveType = 'Medical', @ReserveAmountMin = 500
+      </code>
+    </pre>
+    <p>The result of a procedure can be used in other normal cases (like <b>INSERT INTO</b>)</p>
+    <pre>
+      <code class="sql">
+        CREATE TABLE #Temp1 (
+          ReserveID int PRIMARY KEY
+          , ClaimantID int
+          , ReserveAmount float
+          , ReserveTypeID int
+          , ReserveTypeDesc varchar(30)
+        )
+        
+        INSERT INTO #Temp1
+        EXEC SPGetReserve 'Medical', 500
+        
+        SELECT * FROM #Temp1
+        
+        DROP TABLE #Temp1
+      </code>
+    </pre>
+    <h2>Exercise</h2>
+    <h3>Ex 1</h3>
+    <pre>
+      <code class="sql">
+        CREATE PROCEDURE SPGetNegativeReserveType
+        AS
+        BEGIN
+          SELECT x.ReserveTypeID
+            , CASE WHEN RT.ParentID = 0 THEN RT.ReserveTypeCode ELSE RT2.ReserveTypeCode END AS ReserveBucket
+            , x.NegativeCount
+            , x.AvgNegativeAmount
+          FROM (
+            SELECT ReserveTypeID
+            -- use CASE WHEN to count negative cases
+              , SUM(CASE WHEN ReserveAmount < 0 THEN 1 ELSE 0 END) AS NegativeCount
+              , AVG(CASE WHEN ReserveAmount < 0 THEN ReserveAmount ELSE NULL END) AS AvgNegativeAmount
+            FROM Reserve
+            GROUP BY ReserveTypeID 
+            ) x
+          INNER JOIN ReserveType RT ON RT.reserveTypeID = x.ReserveTypeID
+          LEFT JOIN ReserveType RT2 ON RT2.reserveTypeID = RT.ParentID
+          ORDER BY x.ReserveTypeID
+        END
+      </code>
+    </pre>
+    <h3>Ex 2</h3>
+    <pre>
+      <code class="sql">
+      ALTER PROCEDURE SPGetNegativeReserveType
+        -- this variable is required to run the procedure
+        @NegativeCount int
+        -- variables below are not required, NULL is the default value
+        , @ReserveBucket varchar(15) = NULL
+        , @MaxAvgNegativeAmount float = NULL
+      AS
+      BEGIN
+        SELECT ReserveTypeID, ReserveBucket, NegativeCount, AvgNegativeAmount
+        FROM (
+          SELECT x.ReserveTypeID
+            , CASE WHEN RT.ParentID = 0 THEN RT.ReserveTypeCode ELSE RT2.ReserveTypeCode END AS ReserveBucket
+            , x.NegativeCount
+            , x.AvgNegativeAmount
+          FROM (
+            SELECT ReserveTypeID
+              , SUM(CASE WHEN ReserveAmount < 0 THEN 1 ELSE 0 END) AS NegativeCount
+              , AVG(CASE WHEN ReserveAmount < 0 THEN ReserveAmount ELSE NULL END) AS AvgNegativeAmount
+            FROM Reserve
+            GROUP BY ReserveTypeID 
+            ) x
+          INNER JOIN ReserveType RT ON RT.reserveTypeID = x.ReserveTypeID
+          LEFT JOIN ReserveType RT2 ON RT2.reserveTypeID = RT.ParentID
+          ) sub
+          WHERE NegativeCount <= @NegativeCount 
+            AND (ReserveBucket = @ReserveBucket OR @ReserveBucket IS NULL)
+            AND (@MaxAvgNegativeAmount <= AvgNegativeAmount OR @MaxAvgNegativeAmount IS NULL)
+        ORDER BY ReserveTypeID
+      END
+      
+      EXEC SPGetNegativeReserveType 1
+      </code>
+    </pre>
+    <h3>Ex 3</h3>
+    <pre>
+      <code class="sql">
+        CREATE TABLE #Temp1 (
+          ReserveTypeID int PRIMARY KEY
+          , ReserveBucket varchar(15)
+          , NegativeCount float
+          , AvgNegativeAmount float
+        )
+        
+        INSERT INTO #Temp1
+        EXEC SPGetNegativeReserveType 1
+        
+        SELECT * FROM #Temp1
+        
+        SELECT 
+          C.ExaminerCode
+          , C.ClaimNumber
+          , SUM(R.ReserveAmount) AS ReserveSum
+        FROM Claim C
+        INNER JOIN Users U ON C.ExaminerCode = U.UserName
+        INNER JOIN Claimant Cl ON C.ClaimID = Cl.ClaimID
+        INNER JOIN Reserve R ON R.ClaimantID = Cl.ClaimantID
+        INNER JOIN #Temp1 t ON t.ReserveTypeID = r.ReserveTypeID
+        WHERE U.FirstName = 'Riley' AND U.LastName = 'Kailyn'
+        GROUP BY C.ExaminerCode, C.ClaimNumber
+        
+        DROP TABLE #Temp1
+      </code>
+    </pre>
+    <h3>Ex 4</h3>
+    <p>After done using the procedure, drop it.</p>
+    <pre>
+      <code class="sql">
+        DROP PROCEDURE SPGetNegativeReserveType
+      </code>
+    </pre>
+  </div>
+  
+  <!-- Project Details -->
+  <div class="w3-container" id="details" style="margin-top:75px">
+    <h1 class="w3-xxxlarge w3-text-blue-grey"><b>Project Details</b></h1>
+    <hr style="width:50px;border:5px solid rgb(71, 135, 172)" class="w3-round">
+      <img src="./img/insurance.jpg" style="width: 500px;">
+    <h2>Insurance Background</h2>
+    <p>Note: [Claim] means the claim table in the database.</p>
+    <ul>
+      <li>Business owners will make regular small payments (aka <b>premiums</b>) to the insurance company in case any catastrophe happens.
+        In short, insurance mitigates the risk.
+      </li>
+      <li>In this dataset, the catastrophic event is the injury in the workplace (aka <b>workers compensation insurance</b>). The company will be buying
+        insurance to protect against the cost of employees getting injured on the job.
+      </li>
+      <li><b>[Claim], [Claimant], [ClaimantType]:</b> if one employee gets injured during the work, the company will contact the insurance company. Then the insurance company will open
+        up a <b>claim</b>, and the injured employee will become the <b>claimant</b>.
+      </li>
+      <li>The claim will be reviewed in the insurance company by assigning it to a claims professional (aka <b>examiner</b>). A <b>claim number</b> will
+      be assighed to the claim and the claimant.
+      </li>
+      <li><b>[ClaimLog], [ClaimStatus]:</b> as time goes by, the <b>status</b> of a claim will change. When a claim starts, that is <b>"open"</b>, meaning the claimant 
+        sill expects further payments. When it's settled, then it's <b>"closed"</b>. Also, a claim can be 
+        <b>"re-opened"</b>. Any field change will be recorded in the <b>claim log</b>.
+      </li>
+      <li><b>[Patient]:</b> claimants' personal information will be stored in the <b>patient table</b>.</li>
+      <li>
+        <b>[Reserve], [ReserveType]:</b> the examiner will set aside some amount of money to covor future paymants for the claimant, this is the <b>reserve</b>. Reserve ususlly changes often,
+        so there is a table to track all the changes of the reserve. Also, the reserve can be divided into different categories, that is the <b>reserve type</b>, like medical, td, pd, etc.
+      </li>
+      <li><b>[ReservingTool]:</b> the examiner will be using a <b>reserving tool</b> to help him determinr the reserve set on the claimant's claim. The usage of this tool is also tracked by a table.</li>
+      <li><b>[Users], [Office]:</b> finally, the active employees' information in the insurance company is stored in the <b>users table</b>.</li>
+    </ul>
+    <h2>Project Goal</h2>
+    <p>The examiner will be using the reserving tool to give the reserve amount to the assigned claim. As the claim goes on,
+      the examiner will make changes to the reserve amount, which will be recored in the reserving tool table.
+    </p>
+    <b>Our job is to determine how long an examiner has until they are required to use the Reservig Tool, and if they are already past their
+      due date, how many days they have been overdue. And we will need to do this for all the claims assigned to all of our examiners.
+    </b>
+    <p>At the end of this project, we will be able to give all the required information above by runing a procedure code.</p>
+    <h2>Project Step 1</h2>
+    Write queries to get:
+    <ul>
+      <li>The last date a claimant re-opened claim (for each claimant)</li>
+      <li>The date an examiner was assigned a claim (the latest assigned date for each claim)</li>
+      <li>The last date an examiner published on the Reserving Tool for each claim</li>
+    </ul>
+    <pre>
+      <code class="sql">
+        -- Query 1
+        SELECT ClaimantID, ReopenedDate
+        FROM Claimant
+        
+        -- Quary 2
+        SELECT PK, MAX(EntryDate) AS ExaminerAssignedDate
+        FROM ClaimLog
+        WHERE FieldName = 'ExaminerCode'
+        GROUP BY PK
+        
+        -- Quary 3
+        SELECT ClaimNumber, MAX(EnteredOn) AS LastDate
+        FROM ReservingTool
+        WHERE IsPublished = 1
+        GROUP BY ClaimNumber
+      </code>
+    </pre>
+    <hr>
+    <h2>Project Step 2</h2>
+    Gather information on the Reserving Tool's underlying claims:
+    <ul>
+      <li>Joining fields from different tables in the database</li>
+      <li>Filtering out claims we do not want to include</li>
+    </ul>
+    <pre>
+      <code class="sql">
+      SELECT 
+        c.ClaimNumber
+        , R.ReserveAmount
+        , O.OfficeDesc
+        , U.UserName AS ExaminerCode
+        , Users2.UserName AS SupervisorCode
+        , Users3.UserName AS ManagerCode
+        , U.Title AS ExaminerTitle
+        , Users2.Title AS SupervisorTitle
+        , Users3.Title AS ManagerTitle
+        , U.LastFirstName AS ExaminerName
+        , Users2.LastFirstName AS SupervisorName
+        , Users3.LastFirstName AS ManagerName
+        , CS.ClaimStatusDesc 
+        , P.LastName + ',' + TRIM(P.FirstName + ' ' + P.MiddleName) AS ClaimantName 
+        , CL.ReopenedDate
+        , CT.ClaimantTypeDesc
+        , O.State
+        , U.ReserveLimit
+        , (CASE WHEN RT.ParentID IN (1, 2, 3, 4, 5) THEN RT.ParentID
+          ELSE RT.reserveTypeID END) AS ReserveCostID
+      FROM Claimant CL
+      INNER JOIN CLaim C ON C.ClaimID = CL.ClaimID
+      INNER JOIN Users U ON U.UserName = C.ExaminerCode
+      INNER JOIN Users Users2 ON U.Supervisor = Users2.UserName
+      INNER JOIN Users Users3 ON Users2.Supervisor = Users3.UserName
+      INNER JOIN Office1 O ON O.OfficeID = U.OfficeID
+      INNER JOIN ClaimantType CT ON CT.ClaimantTypeID = CL.ClaimantTypeID
+      INNER JOIN Reserve R ON R.ClaimantID = CL.ClaimantID
+      LEFT JOIN ClaimStatus CS ON CS.ClaimStatusID = CL.claimStatusID
+      LEFT JOIN ReserveType RT ON RT.reserveTypeID = R.ReserveTypeID
+      LEFT JOIN Patient P ON P.PatientID = CL.PatientID
+      WHERE O.OfficeDesc IN ('Sacramento', 'San Diego', 'San Francisco') 
+        AND	(RT.ParentID IN (1, 2, 3, 4, 5) OR RT.reserveTypeID IN (1, 2, 3, 4, 5)) 
+        AND (CS.ClaimStatusID = 1 OR (CS.ClaimStatusID = 2 AND CL.ReopenedReasonID != 3)) 
+      </code>
+    </pre>
+    <hr>
+    <h2>Project Step 3</h2>
+    <p>More filtering to do, and all the filtering is related to the total reserve amounts:</p>
+    <ul>
+      <li><b>PIVOT</b> statement. We nee the total sum of the reserve changes separated by the 5
+      reserve type buckets</li>
+      <li>Filtering out more claims. We need to apply some further filtering conditions.</li>
+    </ul>
+    <pre>
+      <code class="sql">
+        SELECT PivotTable.*
+        FROM (	
+          SELECT 
+            c.ClaimNumber
+            , R.ReserveAmount
+            , (CASE WHEN RT.ParentID IN (1, 2, 3, 4, 5) THEN RT.ParentID
+              ELSE RT.reserveTypeID END) AS ReserveTypeBucketID
+            , O.OfficeDesc AS Office
+            , U.UserName AS ExaminerCode
+            , Users2.UserName AS SupervisorCode
+            , Users3.UserName AS ManagerCode
+            , U.Title AS ExaminerTitle
+            , Users2.Title AS SupervisorTitle
+            , Users3.Title AS ManagerTitle
+            , U.LastFirstName AS ExaminerName
+            , Users2.LastFirstName AS SupervisorName
+            , Users3.LastFirstName AS ManagerName
+            , CS.ClaimStatusDesc 
+            , P.LastName + ',' + TRIM(P.FirstName + ' ' + P.MiddleName) AS ClaimantName 
+            , CL.ReopenedDate
+            , CT.ClaimantTypeDesc
+            , O.State
+            , U.ReserveLimit
+          FROM Claimant CL
+          INNER JOIN CLaim C ON C.ClaimID = CL.ClaimID
+          INNER JOIN Users U ON U.UserName = C.ExaminerCode
+          INNER JOIN Users Users2 ON U.Supervisor = Users2.UserName
+          INNER JOIN Users Users3 ON Users2.Supervisor = Users3.UserName
+          INNER JOIN Office1 O ON O.OfficeID = U.OfficeID
+          INNER JOIN ClaimantType CT ON CT.ClaimantTypeID = CL.ClaimantTypeID
+          INNER JOIN Reserve R ON R.ClaimantID = CL.ClaimantID
+          LEFT JOIN ClaimStatus CS ON CS.ClaimStatusID = CL.claimStatusID
+          LEFT JOIN ReserveType RT ON RT.reserveTypeID = R.ReserveTypeID
+          LEFT JOIN Patient P ON P.PatientID = CL.PatientID
+          WHERE O.OfficeDesc IN ('Sacramento', 'San Diego', 'San Francisco') 
+            AND	(RT.ParentID IN (1, 2, 3, 4, 5) OR RT.reserveTypeID IN (1, 2, 3, 4, 5)) 
+            AND (CS.ClaimStatusID = 1 OR (CS.ClaimStatusID = 2 AND CL.ReopenedReasonID != 3)) 
+        ) BaseData
+        -- use pivot
+        PIVOT (
+        SUM(ReserveAmount)
+          FOR ReserveTypeBucketID IN ([1], [2], [3], [4], [5])
+        ) PivotTable
+        -- add new filtering conditions
+        WHERE (PivotTable.ClaimantTypeDesc IN ('Medical Only', 'First Aid')) 
+          -- be careful about the NULL values!
+          OR (PivotTable.Office = 'San Diego' 
+            AND (ISNULL([1], 0) + ISNULL([2], 0) + ISNULL([3], 0) + ISNULL([4], 0) + ISNULL([5], 0) >= PivotTable.ReserveLimit)) 
+          OR (PivotTable.Office IN ('Sacramento', 'San Francisco') 
+            AND (ISNULL([1], 0) > 800 
+              OR ISNULL([5], 0) > 100 
+              OR (ISNULL([2], 0) > 0 OR ISNULL([3], 0) > 0 OR iSNULL([4], 0) > 0)))
+      </code>
+    </pre>
+    <hr>
+    <h2>Project Step 4</h2>
+    <p>Create one variable to set the "As Of" date:</p>
+    <ul>
+      <li>The date we ran the report, which is for reproducibility.</li>
+    </ul>
+    <p>Create two custom table variables:</p>
+    <ul>
+      <li>Published Reserving Tool table, which is used to get the most recent publish in Reserving Tool</li>
+      <li>Assigned Date table, which is used to get current examiner assigned date</li>
+    </ul>
+    <pre>
+      <code class="sql">
+        -- As Of variable
+        DECLARE @DateAsOf date
+        SET @DateAsOf = '1/1/2019'
+        
+        -- two table variables
+        DECLARE @ReservingToolPbl TABLE (
+          ClaimNumber varchar(30),
+          LastPublishedDate datetime
+        )
+        DECLARE @AssignedDateLog TABLE (
+          PK int,
+          ExaminerAssignedDate datetime
+        )
+      </code>
+    </pre>
+    <hr>
+    <h2>Project Step 5</h2>
+    <p>Review the point of this project:</p>
+    <ul>
+      <li>Identify which claims need to use the Reserving Tool</li>
+      <li>How long a claim has until it requires an updated publish in the reserving tool</li>
+    </ul>
+    <p>In this step, we'll need to finish the work left in Step 4. Be careful to get the two fields below right:</p>
+    <ul>
+      <li>Number of Days Left to Complete a Publish in the Reserving Tool</li>
+      <li>Number of Days that a Publish is Overdue</li>
+    </ul>
+    <pre>
+      <code class="sql">
+        -- populate the two table variables
+        INSERT INTO @ReservingToolPbl
+        SELECT ClaimNumber, MAX(EnteredOn) AS LastPublished
+        FROM ReservingTool
+        WHERE IsPublished = 1
+        GROUP BY ClaimNumber
+        
+        INSERT INTO @AssignedDateLog
+        SELECT PK, MAX(EntryDate) AS ExaminerAssignedDate
+        FROM ClaimLog
+        WHERE FieldName = 'ExaminerCode'
+        GROUP BY PK
+        
+        --SELECT * FROM @ReservingToolPbl
+        --SELECT * FROM @AssignedDateLog
+      </code>
+    </pre>
+    <p>Continue on the result from Step 3:</p>
+    <pre>
+      <code class="sql">
+      -- finish the SELECT statement
+      SELECT ClaimNumber
+        , ManagerCode
+        , ManagerTitle
+        , ManagerName
+        , SupervisorCode
+        , SupervisorTitle
+        , SupervisorName
+        , ExaminerCode
+        , ExaminerTitle
+        , ExaminerName
+        , Office
+        , ClaimStatus
+        , ClaimantName
+        , ClaimantTypeDesc
+        , ExaminerAssignedDate
+        , ReopenedDate
+        , AdjustedAssignedDate
+        , LastPublishedDate
+        , DaySinceAdjustedAssignedDate
+        , DaySinceLastPublishedDate
+        -- most important part
+        , CASE WHEN DaySinceAdjustedAssignedDate > 14 AND (DaySinceLastPublishedDate > 90 OR DaySinceLastPublishedDate IS NULL) THEN 0
+          -- choose the one with more days left, that it the number of days to complete
+          WHEN 91 - DaySinceLastPublishedDate >= 15 - DaySinceAdjustedAssignedDate AND DaySinceLastPublishedDate IS NOT NULL THEN 91 - DaySinceLastPublishedDate
+          ELSE 15 - DaySinceAdjustedAssignedDate
+          END AS DaysToComplete
+        , CASE WHEN DaySinceAdjustedAssignedDate <= 14 OR (DaySinceLastPublishedDate <= 90 AND DaySinceLastPublishedDate IS NOT NULL) THEN 0
+          -- choose the one with less days left, similar to the previous one
+          WHEN DaySinceLastPublishedDate - 90 <= DaySinceAdjustedAssignedDate - 14 AND DaySinceLastPublishedDate IS NOT NULL THEN DaySinceLastPublishedDate - 90
+          ELSE DaySinceAdjustedAssignedDate - 14
+          END AS DaysOverdue
+      FROM (	
+        SELECT 
+          c.ClaimNumber
+          , R.ReserveAmount
+          , (CASE WHEN RT.ParentID IN (1, 2, 3, 4, 5) THEN RT.ParentID
+            ELSE RT.reserveTypeID END) AS ReserveTypeBucketID
+          , O.OfficeDesc AS Office
+          , U.UserName AS ExaminerCode
+          , Users2.UserName AS SupervisorCode
+          , Users3.UserName AS ManagerCode
+          , U.Title AS ExaminerTitle
+          , Users2.Title AS SupervisorTitle
+          , Users3.Title AS ManagerTitle
+          , U.LastFirstName AS ExaminerName
+          , Users2.LastFirstName AS SupervisorName
+          , Users3.LastFirstName AS ManagerName
+          , CS.ClaimStatusDesc AS ClaimStatus
+          , P.LastName + ',' + TRIM(P.FirstName + ' ' + P.MiddleName) AS ClaimantName 
+          , CL.ReopenedDate
+          , CT.ClaimantTypeDesc
+          , O.State
+          , U.ReserveLimit
+          , ADL.ExaminerAssignedDate
+          , CASE WHEN CS.ClaimStatusDesc = 'Re-Open' AND CL.ReopenedDate > ADL.ExaminerAssignedDate THEN CL.ReopenedDate
+            ELSE ADL.ExaminerAssignedDate
+            END AS AdjustedAssignedDate
+          , RTP.LastPublishedDate
+          -- DATEDIFF is used to find the date difference
+          , CASE WHEN CS.ClaimStatusDesc = 'Re-Open' AND CL.ReopenedDate > ADL.ExaminerAssignedDate THEN DATEDIFF(DAY, CL.ReopenedDate, @DateAsOf)
+            ELSE DATEDIFF(DAY, ADL.ExaminerAssignedDate, @DateAsOf)
+            END AS DaySinceAdjustedAssignedDate
+          , DATEDIFF(DAY, LastPublishedDate, @DateAsOf) AS DaySinceLastPublishedDate
+        FROM Claimant CL
+        INNER JOIN CLaim C ON C.ClaimID = CL.ClaimID
+        INNER JOIN Users U ON U.UserName = C.ExaminerCode
+        INNER JOIN Users Users2 ON U.Supervisor = Users2.UserName
+        INNER JOIN Users Users3 ON Users2.Supervisor = Users3.UserName
+        INNER JOIN Office1 O ON O.OfficeID = U.OfficeID
+        INNER JOIN ClaimantType CT ON CT.ClaimantTypeID = CL.ClaimantTypeID
+        INNER JOIN Reserve R ON R.ClaimantID = CL.ClaimantID
+        LEFT JOIN ClaimStatus CS ON CS.ClaimStatusID = CL.claimStatusID
+        LEFT JOIN ReserveType RT ON RT.reserveTypeID = R.ReserveTypeID
+        LEFT JOIN Patient P ON P.PatientID = CL.PatientID
+        INNER JOIN @AssignedDateLog ADL ON ADL.PK = C.ClaimID
+        LEFT JOIN @ReservingToolPbl RTP ON C.ClaimNumber = RTP.ClaimNumber
+        WHERE O.OfficeDesc IN ('Sacramento', 'San Diego', 'San Francisco') 
+          AND	(RT.ParentID IN (1, 2, 3, 4, 5) OR RT.reserveTypeID IN (1, 2, 3, 4, 5)) 
+          AND (CS.ClaimStatusID = 1 OR (CS.ClaimStatusID = 2 AND CL.ReopenedReasonID != 3)) 
+      ) BaseData
+      PIVOT (
+      SUM(ReserveAmount)
+        FOR ReserveTypeBucketID IN ([1], [2], [3], [4], [5])
+      ) PivotTable
+      WHERE (PivotTable.ClaimantTypeDesc IN ('Medical Only', 'First Aid')) 
+        -- be careful about the NULL values!
+        OR (PivotTable.Office = 'San Diego' 
+          AND (ISNULL([1], 0) + ISNULL([2], 0) + ISNULL([3], 0) + ISNULL([4], 0) + ISNULL([5], 0) >= PivotTable.ReserveLimit)) 
+        OR (PivotTable.Office IN ('Sacramento', 'San Francisco') 
+          AND (ISNULL([1], 0) > 800 
+            OR ISNULL([5], 0) > 100 
+            OR (ISNULL([2], 0) > 0 OR ISNULL([3], 0) > 0 OR iSNULL([4], 0) > 0)))
+      </code>
+    </pre>
+    <hr>
+    <h2>Project Step 6 (final)</h2>
+    <p>Turn our query into a stored procedure.</p>
+    <p>Create a procedure <b>SPGetOutstandingRTPublish</b> with the following parameters (all parameters are optional). </p>
+    <ul>
+      <li><b>Days To Complete:</b> shows records with less than or equal to the inputted number of Days To Complete</li>
+      <li><b>Days Overdue:</b> shows records with greater than or equal to the inputted number of Days Overdue</li>
+      <li><b>Office</b></li>
+      <li><b>Manager Code</b></li>
+      <li><b>Supervisor Code</b></li>
+      <li><b>Examiner Code</b></li>
+      <li><b>Team:</b> shows records where any of the titles include the inputted Team, like "Specialist"</li>
+      <li><b>Claims Without Reserving Tool Publish:</b> when a "1" is inputted, only records without a Reserving Tool Publish are selected</li>
+    </ul>
+    <pre>
+      <code class="sql">
+        DROP PROCEDURE SPGetOutstandingRTPublish
+        CREATE PROCEDURE SPGetOutstandingRTPublish (
+          @DaysToComplete int = NULL
+          , @DaysOverdue int = NULL
+          , @Office varchar(31) = NULL
+          , @ManagerCode varchar(31) = NULL
+          , @SupervisorCode varchar(31) = NULL
+          , @ExaminerCode varchar(31) = NULL
+          , @Team varchar(250) = NULL
+          , @ClaimsWithoutRTPublish bit = 0 
+        )
+        AS
+        BEGIN
+          -- declare variables first
+          DECLARE @DateAsOf date
+          SET @DateAsOf = '1/1/2019'
+        
+          DECLARE @ReservingToolPbl TABLE (
+              ClaimNumber varchar(30),
+              LastPublishedDate datetime
+          )
+        
+          DECLARE @AssignedDateLog TABLE (
+              PK int,
+              ExaminerAssignedDate datetime
+            )
+          -- populate table variables
+          INSERT INTO @ReservingToolPbl
+          SELECT ClaimNumber, MAX(EnteredOn) AS LastPublished
+          FROM ReservingTool
+          WHERE IsPublished = 1
+          GROUP BY ClaimNumber
+        
+          INSERT INTO @AssignedDateLog
+          SELECT PK, MAX(EntryDate) AS ExaminerAssignedDate
+          FROM ClaimLog
+          WHERE FieldName = 'ExaminerCode'
+          GROUP BY PK
+
+          -- main query
+          SELECT *
+          FROM (
+            SELECT ClaimNumber
+              , ManagerCode
+              , ManagerTitle
+              , ManagerName
+              , SupervisorCode
+              , SupervisorTitle
+              , SupervisorName
+              , ExaminerCode
+              , ExaminerTitle
+              , ExaminerName
+              , Office
+              , ClaimStatus
+              , ClaimantName
+              , ClaimantTypeDesc
+              , ExaminerAssignedDate
+              , ReopenedDate
+              , AdjustedAssignedDate
+              , LastPublishedDate
+              , DaySinceAdjustedAssignedDate
+              , DaySinceLastPublishedDate
+              , CASE WHEN DaySinceAdjustedAssignedDate > 14 AND (DaySinceLastPublishedDate > 90 OR DaySinceLastPublishedDate IS NULL) THEN 0
+                -- choose the one with more days left, that it the number of days to complete
+                WHEN 91 - DaySinceLastPublishedDate >= 15 - DaySinceAdjustedAssignedDate AND DaySinceLastPublishedDate IS NOT NULL THEN 91 - DaySinceLastPublishedDate
+                ELSE 15 - DaySinceAdjustedAssignedDate
+                END AS DaysToComplete
+              , CASE WHEN DaySinceAdjustedAssignedDate <= 14 OR (DaySinceLastPublishedDate <= 90 AND DaySinceLastPublishedDate IS NOT NULL) THEN 0
+                -- choose the one with less days left, similar to the previous one
+                WHEN DaySinceLastPublishedDate - 90 <= DaySinceAdjustedAssignedDate - 14 AND DaySinceLastPublishedDate IS NOT NULL THEN DaySinceLastPublishedDate - 90
+                ELSE DaySinceAdjustedAssignedDate - 14
+                END AS DaysOverdue
+            FROM (	
+              SELECT 
+                c.ClaimNumber
+                , R.ReserveAmount
+                , (CASE WHEN RT.ParentID IN (1, 2, 3, 4, 5) THEN RT.ParentID
+                  ELSE RT.reserveTypeID END) AS ReserveTypeBucketID
+                , O.OfficeDesc AS Office
+                , U.UserName AS ExaminerCode
+                , Users2.UserName AS SupervisorCode
+                , Users3.UserName AS ManagerCode
+                , U.Title AS ExaminerTitle
+                , Users2.Title AS SupervisorTitle
+                , Users3.Title AS ManagerTitle
+                , U.LastFirstName AS ExaminerName
+                , Users2.LastFirstName AS SupervisorName
+                , Users3.LastFirstName AS ManagerName
+                , CS.ClaimStatusDesc AS ClaimStatus
+                , P.LastName + ',' + TRIM(P.FirstName + ' ' + P.MiddleName) AS ClaimantName 
+                , CL.ReopenedDate
+                , CT.ClaimantTypeDesc
+                , O.State
+                , U.ReserveLimit
+                , ADL.ExaminerAssignedDate
+                , CASE WHEN CS.ClaimStatusDesc = 'Re-Open' AND CL.ReopenedDate > ADL.ExaminerAssignedDate THEN CL.ReopenedDate
+                  ELSE ADL.ExaminerAssignedDate
+                  END AS AdjustedAssignedDate
+                , RTP.LastPublishedDate
+                -- DATEDIFF is used to find the date difference
+                , CASE WHEN CS.ClaimStatusDesc = 'Re-Open' AND CL.ReopenedDate > ADL.ExaminerAssignedDate THEN DATEDIFF(DAY, CL.ReopenedDate, @DateAsOf)
+                  ELSE DATEDIFF(DAY, ADL.ExaminerAssignedDate, @DateAsOf)
+                  END AS DaySinceAdjustedAssignedDate
+                , DATEDIFF(DAY, LastPublishedDate, @DateAsOf) AS DaySinceLastPublishedDate
+              FROM Claimant CL
+              INNER JOIN CLaim C ON C.ClaimID = CL.ClaimID
+              INNER JOIN Users U ON U.UserName = C.ExaminerCode
+              INNER JOIN Users Users2 ON U.Supervisor = Users2.UserName
+              INNER JOIN Users Users3 ON Users2.Supervisor = Users3.UserName
+              INNER JOIN Office1 O ON O.OfficeID = U.OfficeID
+              INNER JOIN ClaimantType CT ON CT.ClaimantTypeID = CL.ClaimantTypeID
+              INNER JOIN Reserve R ON R.ClaimantID = CL.ClaimantID
+              LEFT JOIN ClaimStatus CS ON CS.ClaimStatusID = CL.claimStatusID
+              LEFT JOIN ReserveType RT ON RT.reserveTypeID = R.ReserveTypeID
+              LEFT JOIN Patient P ON P.PatientID = CL.PatientID
+              INNER JOIN @AssignedDateLog ADL ON ADL.PK = C.ClaimID
+              LEFT JOIN @ReservingToolPbl RTP ON C.ClaimNumber = RTP.ClaimNumber
+              WHERE O.OfficeDesc IN ('Sacramento', 'San Diego', 'San Francisco') 
+                AND	(RT.ParentID IN (1, 2, 3, 4, 5) OR RT.reserveTypeID IN (1, 2, 3, 4, 5)) 
+                AND (CS.ClaimStatusID = 1 OR (CS.ClaimStatusID = 2 AND CL.ReopenedReasonID != 3)) 
+            ) BaseData
+            PIVOT (
+            SUM(ReserveAmount)
+              FOR ReserveTypeBucketID IN ([1], [2], [3], [4], [5])
+            ) PivotTable
+            WHERE (PivotTable.ClaimantTypeDesc IN ('Medical Only', 'First Aid')) 
+              -- be careful about the NULL values!
+              OR (PivotTable.Office = 'San Diego' 
+                AND (ISNULL([1], 0) + ISNULL([2], 0) + ISNULL([3], 0) + ISNULL([4], 0) + ISNULL([5], 0) >= PivotTable.ReserveLimit)) 
+              OR (PivotTable.Office IN ('Sacramento', 'San Francisco') 
+                AND (ISNULL([1], 0) > 800 
+                  OR ISNULL([5], 0) > 100 
+                  OR (ISNULL([2], 0) > 0 OR ISNULL([3], 0) > 0 OR iSNULL([4], 0) > 0)))
+          ) MainQuery
+          WHERE (DaysToComplete <= @DaysToComplete OR @DaysToComplete IS NULL)
+            AND (DaysOverdue <= @DaysOverdue OR @DaysOverdue IS NULL) 
+            AND (Office = @Office OR @Office IS NULL)
+            AND (ManagerCode = @ManagerCode OR @ManagerCode IS NULL)
+            AND (SupervisorCode = @SupervisorCode OR @SupervisorCode IS NULL)
+            AND (ExaminerCode = @ExaminerCode OR @ExaminerCode IS NULL)
+            AND (ExaminerTitle LIKE '%' + @Team + '%' OR SupervisorTitle LIKE '%' + @Team + '%' OR ManagerTitle LIKE '%' + @Team + '%' OR @Team IS NULL)
+            AND (@ClaimsWithoutRTPublish = 0 OR LastPublishedDate IS NULL)
+        END
+        
+        -- execute with or without parameters
+        EXEC SPGetOutstandingRTPublish
+        EXEC SPGetOutstandingRTPublish @ClaimsWithoutRTPublish = 1
+        EXEC SPGetOutstandingRTPublish NULL, NULL, NULL, NULL, 'qkemp', NULL, NULL, 0
+      </code>
+    </pre>
+  </div>
+  <!-- Result -->
+  <div class="w3-container" style="margin-top:80px" id="result">
+    <h1 class="w3-xxxlarge w3-text-blue-grey"><b>Project Result</b></h1>
+    <hr style="width:50px;border:5px solid rgb(71, 135, 172)" class="w3-round">
+
+  </div>
+</div>
+
+<!-- W3.CSS Container -->
+<div class="w3-light-grey w3-container w3-padding-32" style="margin-top:75px;padding-right:58px"><p class="w3-right">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></p></div>
+
+<script>
+// Script to open and close sidebar
+function w3_open() {
+  document.getElementById("mySidebar").style.display = "block";
+  document.getElementById("myOverlay").style.display = "block";
+}
+ 
+function w3_close() {
+  document.getElementById("mySidebar").style.display = "none";
+  document.getElementById("myOverlay").style.display = "none";
+}
+
+// Modal Image Gallery
+function onClick(element) {
+  document.getElementById("img01").src = element.src;
+  document.getElementById("modal01").style.display = "block";
+  var captionText = document.getElementById("caption");
+  captionText.innerHTML = element.alt;
+}
+</script>
+
+
+</body>
+</html>
