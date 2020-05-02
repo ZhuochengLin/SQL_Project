@@ -28,6 +28,10 @@ button {
 button:hover {
   background-color: rgb(26, 123, 219);
 }
+iframe {
+  padding: 0px;
+  width: 100%;
+}
 </style>
 <body>
 
@@ -65,15 +69,19 @@ button:hover {
     </a>
     <h1 class="w3-xxxlarge w3-text-blue-grey"><b>Introduction</b></h1>
     <hr style="width:50px;border:5px solid rgb(71, 135, 172)" class="w3-round">
-    <p>This project is a course assignment built on a well-designed mock dataset, which covers all the commonly used SQL quaries and integrates all the quaries into stored procedures.
+    <h2>What's this project</h2>
+    <p>This project is a course assignment built on a well-designed mock insurance dataset, which covers all the commonly used SQL quaries and integrates all the quaries into stored procedures.
       To be specific, <b>Microsoft SQL Server</b> is used in this project.
     </p>
+    <h2>About the course</h2>
     <p>You can find the course details through this link: <a class="w3-text-blue-grey" href="https://www.udemy.com/course/project-based-sql-course/" target="_blank">https://www.udemy.com/course/project-based-sql-course/</a></p>
     <p>To simulate a real life problem solving process, the dataset we use is designed to be intricate enough to give interesting exercises. To fully understand this project may need
         some background knowledge on Insurance, which I'll briefly talk about in the "Project Details" part.</p>
+    <h2>Why make this page</h2>
     <p>To better understand the content and practice my skills, I decide to gether all the key points from the lectures, exercise codes, project details and my personal notes together
         and put them into this GitHub Repo for future use.</p>
     <p>If you are interested in my work or have any other thoughts, welcome to reach out to me, <a href="mailto: zhuochengg.lin@gmail.com" class="w3-text-blue-grey">zhuochengg.lin@gmail.com</a></p>
+    <p>See my other projects here: <a href='https://zhuochenglin.github.io/' class="w3-text-blue-grey">https://zhuochenglin.github.io/</a></p>
   </div>
 
   <!-- basic -->
@@ -1170,7 +1178,7 @@ button:hover {
     <hr style="width:50px;border:5px solid rgb(71, 135, 172)" class="w3-round">
       <img src="./img/insurance.jpg" style="width: 500px;">
     <h2>Insurance Background</h2>
-    <p>Note: [Claim] means the claim table in the database.</p>
+    <p>Note: [table name] means the table in the database.</p>
     <ul>
       <li>Business owners will make regular small payments (aka <b>premiums</b>) to the insurance company in case any catastrophe happens.
         In short, insurance mitigates the risk.
@@ -1668,7 +1676,8 @@ button:hover {
   <div class="w3-container" style="margin-top:80px" id="result">
     <h1 class="w3-xxxlarge w3-text-blue-grey"><b>Project Result</b></h1>
     <hr style="width:50px;border:5px solid rgb(71, 135, 172)" class="w3-round">
-
+    <p>The result of running the stored procedure is attched below:</p>
+    <iframe src="sql_result.html" style="height:600px;" scrolling="yes"></iframe>
   </div>
 </div>
 
